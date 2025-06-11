@@ -89,9 +89,9 @@ type TimeSliderProps = {
 const TimeSlider: React.FC<TimeSliderProps> = ({
   time,
   setTime,
-  startTime = 8,
+  startTime = 10,
   endTime = 18,
-  step = 1
+  step = 2
 }) => {
   const formatTime = (hour: number) => `${hour.toString().padStart(2, '0')}:00`;
 
@@ -291,7 +291,7 @@ const MapComponent: React.FC<MapComponentProps> = ({ plotData, selectedParameter
 // --- Main Component ---
 
 const App: React.FC = () => {
-  const [selectedTime, setSelectedTime] = useState<number>(8);
+  const [selectedTime, setSelectedTime] = useState<number>(10);
   const [selectedParameterKey, setSelectedParameterKey] = useState<keyof RoomStatus>('noise');
 
   const plotData = preparePlotData(selectedTime, selectedParameterKey);
@@ -307,7 +307,7 @@ const App: React.FC = () => {
         label="Select Parameter"
       />
 
-      <TimeSlider time={selectedTime} setTime={setSelectedTime} startTime={8} endTime={18} step={1} />
+      <TimeSlider time={selectedTime} setTime={setSelectedTime} />
 
       <MapComponent plotData={plotData} selectedParameterKey={selectedParameterKey} />
 
