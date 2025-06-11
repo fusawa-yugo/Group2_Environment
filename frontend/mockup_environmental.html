@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic University of Oulu Map</title>
+    <!-- Tailwind CSS for rapid and modern styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Base font style */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Smooth transitions for color changes on map areas */
+        .map-area {
+            transition: fill 0.3s ease-in-out;
+            stroke: #374151; /* Border color (dark gray) */
+            stroke-width: 2;
+            cursor: pointer;
+        }
+        .map-area:hover {
+            stroke-width: 4;
+            stroke: #0ea5e9; /* Border color on hover (sky blue) */
+        }
+        /* Tooltip styles */
+        #tooltip {
+            position: absolute;
+            display: none;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            pointer-events: none; /* Tooltip should not intercept mouse events */
+            white-space: nowrap;
+        }
+        /* 時間帯スライダーのスタイル */
+        .time-slider-container {
+            margin-bottom: 1.5rem;
+        }
+        .time-slider {
+            width: 100%;
+        }
+        .time-marks {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.5rem;
+            font-size: 12px;
+            color: #6b7280;
+        }
+        .current-time-display {
+            text-align: center;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: #374151;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+
+    <div class="bg-white rounded-2xl shadow-2xl p-6 md:p-8 w-full max-w-5xl mx-4 my-8">
+        
+        <header class="text-center mb-6">
+            <h1 class="text-3xl font-bold text-gray-800">Dynamic University of Oulu Map</h1>
+            <p class="text-gray-500 mt-1">Linnanmaa Campus - Real-Time Environmental Data</p>
+        </header>
+        
+        <!-- 時間帯スライダー -->
+        <div class="time-slider-container">
+            <div class="current-time-display" id="current-time">08:00</div>
+            <input type="range" min="8" max="22" value="8" step="1" class="time-slider" id="time-slider">
+            <div class="time-marks">
+                <span>08:00</span>
+                <span>10:00</span>
+                <span>12:00</span>
+                <span>14:00</span>
+                <span>16:00</span>
+                <span>18:00</span>
+                <span>20:00</span>
+                <span>22:00</span>
+            </div>
+        </div>
+
+        <!-- Controls and Legend -->
+        <div class="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
+            <div class="w-full md:w-auto">
+                <label for="parameter-select" class="block text-sm font-medium text-gray-700 mb-1">View by:</label>
+                <select id="parameter-select" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5">
+                    <option value="noise" selected>Noise Level</option>
+                    <option value="brightness">Brightness</option>
+                    <option value="occupancy">Occupancy</option>
+                </select>
+            </div>
+            <div id="legenda" class="flex items-center space-x-4 p-2 rounded-lg bg-gray-50">
+                <!-- Legend will be dynamically populated with JavaScript -->
+            </div>
+        </div>
+
+        <!-- Map Container -->
+        <div class="bg-gray-200 rounded-lg p-4">
+            <svg id="mappa-svg" viewBox="0 0 800 600" class="w-full h-auto">
+                <!-- Simplified map of University of Oulu, Linnanmaa campus -->
+                <path id="pegasus-library" class="map-area" data-name="Pegasus Library" d="M20,150 h250 v300 h-250 z" />
+                <path id="tellus-arena" class="map-area" data-name="Tellus Innovation Arena" d="M290,20 h220 v250 h-220 z" />
+                <path id="main-lobby" class="map-area" data-name="Main Lobby" d="M290,290 h220 v290 h-220 z" />
+                <path id="restaurant-kastari" class="map-area" data-name="Restaurant Kastari" d="M20,20 h250 v110 h-250 z" />
+                <path id="itee-faculty" class="map-area" data-name="Faculty of ITEE" d="M530,20 h250 v250 h-250 z" />
+                <path id="lecture-halls" class="map-area" data-name="Lecture Halls (L-series)" d="M530,290 h250 v290 h-250 z" />
+
+                <!-- Text labels for the areas -->
+                <text x="145" y="305" text-anchor="middle" class="font-semibold pointer-events-none">Pegasus Library</text>
+                <text x="400" y="150" text-anchor="middle" class="font-semibold pointer-events-none">Tellus Arena</text>
+                <text x="400" y="440" text-anchor="middle" class="font-semibold pointer-events-none">Main Lobby</text>
+                <text x="145" y="80" text-anchor="middle" class="font-semibold pointer-events-none">Restaurant Kastari</text>
+                <text x="655" y="150" text-anchor="middle" class="font-semibold pointer-events-none">Faculty of ITEE</text>
+                <text x="655" y="440" text-anchor="middle" class="font-semibold pointer-events-none">Lecture Halls</text>
+            </svg>
+        </div>
+    </div>
+    
+    <!-- Tooltip that appears on hover -->
+    <div id="tooltip"></div>
+
+<script>
+    // --- MOCK DATA ---
+    // This data is representative for the University of Oulu campus areas.
+    const mockData = {
+        // 時間帯ごとのデータを格納する階層的オブジェクト
+        timeBasedData: {
+            8: { // 8:00 AM
+                noise: {
+                    'pegasus-library': 'low',
+                    'tellus-arena': 'low',
+                    'main-lobby': 'medium',
+                    'restaurant-kastari': 'medium',
+                    'itee-faculty': 'low',
+                    'lecture-halls': 'low',
+                },
+                brightness: {
+                    'pegasus-library': 'high',
+                    'tellus-arena': 'high',
+                    'main-lobby': 'medium',
+                    'restaurant-kastari': 'medium',
+                    'itee-faculty': 'medium',
+                    'lecture-halls': 'medium',
+                },
+                occupancy: {
+                    'pegasus-library': 'low',
+                    'tellus-arena': 'low',
+                    'main-lobby': 'medium',
+                    'restaurant-kastari': 'medium',
+                    'itee-faculty': 'low',
+                    'lecture-halls': 'low',
+                }
+            },
+            12: { // 12:00 PM
+                noise: {
+                    'pegasus-library': 'medium',
+                    'tellus-arena': 'high',
+                    'main-lobby': 'high',
+                    'restaurant-kastari': 'high',
+                    'itee-faculty': 'medium',
+                    'lecture-halls': 'medium',
+                },
+                brightness: {
+                    'pegasus-library': 'high',
+                    'tellus-arena': 'high',
+                    'main-lobby': 'high',
+                    'restaurant-kastari': 'high',
+                    'itee-faculty': 'high',
+                    'lecture-halls': 'high',
+                },
+                occupancy: {
+                    'pegasus-library': 'medium',
+                    'tellus-arena': 'high',
+                    'main-lobby': 'high',
+                    'restaurant-kastari': 'high',
+                    'itee-faculty': 'high',
+                    'lecture-halls': 'medium',
+                }
+            },
+            16: { // 16:00 PM
+                noise: {
+                    'pegasus-library': 'medium',
+                    'tellus-arena': 'medium',
+                    'main-lobby': 'medium',
+                    'restaurant-kastari': 'high',
+                    'itee-faculty': 'medium',
+                    'lecture-halls': 'low',
+                },
+                brightness: {
+                    'pegasus-library': 'high',
+                    'tellus-arena': 'high',
+                    'main-lobby': 'medium',
+                    'restaurant-kastari': 'high',
+                    'itee-faculty': 'medium',
+                    'lecture-halls': 'medium',
+                },
+                occupancy: {
+                    'pegasus-library': 'medium',
+                    'tellus-arena': 'medium',
+                    'main-lobby': 'high',
+                    'restaurant-kastari': 'high',
+                    'itee-faculty': 'medium',
+                    'lecture-halls': 'low',
+                }
+            },
+            20: { // 20:00 PM
+                noise: {
+                    'pegasus-library': 'high',
+                    'tellus-arena': 'low',
+                    'main-lobby': 'low',
+                    'restaurant-kastari': 'low',
+                    'itee-faculty': 'medium',
+                    'lecture-halls': 'low',
+                },
+                brightness: {
+                    'pegasus-library': 'medium',
+                    'tellus-arena': 'low',
+                    'main-lobby': 'low',
+                    'restaurant-kastari': 'low',
+                    'itee-faculty': 'medium',
+                    'lecture-halls': 'low',
+                },
+                occupancy: {
+                    'pegasus-library': 'high',
+                    'tellus-arena': 'low',
+                    'main-lobby': 'low',
+                    'restaurant-kastari': 'low',
+                    'itee-faculty': 'medium',
+                    'lecture-halls': 'low',
+                }
+            },
+        },
+        
+        // 既存のデータをデフォルト状態として保持
+        noise: {
+            'pegasus-library': 'low',
+            'tellus-arena': 'medium',
+            'main-lobby': 'medium',
+            'restaurant-kastari': 'high',
+            'itee-faculty': 'medium',
+            'lecture-halls': 'low',
+        },
+        brightness: {
+            'pegasus-library': 'high',
+            'tellus-arena': 'high',
+            'main-lobby': 'medium',
+            'restaurant-kastari': 'high',
+            'itee-faculty': 'medium',
+            'lecture-halls': 'medium',
+        },
+        occupancy: {
+            'pegasus-library': 'medium',
+            'tellus-arena': 'medium',
+            'main-lobby': 'high',
+            'restaurant-kastari': 'high',
+            'itee-faculty': 'high',
+            'lecture-halls': 'low',
+        }
+    };
+
+    // --- CONFIGURATION ---
+    // Maps data levels to Tailwind CSS colors and legend text
+    const config = {
+        noise: {
+            low: { color: 'fill-green-400', text: 'Quiet' },
+            medium: { color: 'fill-yellow-400', text: 'Moderate' },
+            high:  { color: 'fill-red-500', text: 'Noisy' }
+        },
+        brightness: {
+            low: { color: 'fill-blue-300', text: 'Low' },
+            medium: { color: 'fill-yellow-300', text: 'Medium' },
+            high:  { color: 'fill-amber-300', text: 'High' }
+        },
+        occupancy: {
+            low: { color: 'fill-sky-400', text: 'Not Crowded' },
+            medium: { color: 'fill-orange-400', text: 'Moderate' },
+            high:  { color: 'fill-fuchsia-600', text: 'Very Crowded' }
+        }
+    };
+
+    // --- DOM ELEMENTS ---
+    const select = document.getElementById('parameter-select');
+    const legendContainer = document.getElementById('legenda');
+    const mapAreas = document.querySelectorAll('.map-area');
+    const tooltip = document.getElementById('tooltip');
+    const timeSlider = document.getElementById('time-slider');
+    const currentTimeDisplay = document.getElementById('current-time');
+
+    // --- FUNCTIONS ---
+
+    /**
+     * 時間値を「HH:00」形式でフォーマットする
+     * @param {number} hour - 時間（8-22）
+     * @return {string} フォーマットされた時間文字列
+     */
+    function formatTime(hour) {
+        return `${hour.toString().padStart(2, '0')}:00`;
+    }
+
+    /**
+     * 指定された時間に最も近い時間帯データを取得する
+     * @param {number} hour - 現在のスライダーの時間
+     * @return {number} 利用可能な最も近い時間帯のキー
+     */
+    function getNearestTimeKey(hour) {
+        const availableHours = Object.keys(mockData.timeBasedData).map(Number);
+        return availableHours.reduce((prev, curr) => 
+            Math.abs(curr - hour) < Math.abs(prev - hour) ? curr : prev
+        );
+    }
+
+    /**
+     * Updates the map colors based on the selected parameter and current time.
+     * @param {string} parameter - The parameter key (e.g., 'noise').
+     * @param {number} hour - Current hour from the time slider.
+     */
+    function updateMap(parameter, hour) {
+        // 最も近い時間帯のデータを取得
+        const nearestHour = getNearestTimeKey(hour);
+        
+        // 時間帯に基づいたデータセットを取得
+        const dataSet = mockData.timeBasedData[nearestHour][parameter];
+        const colorConfig = config[parameter];
+
+        mapAreas.forEach(area => {
+            const areaId = area.id;
+            const level = dataSet[areaId] || 'low'; // Default value
+            const colorClass = colorConfig[level].color;
+
+            // Removes previous color classes and adds the new one
+            area.classList.remove('fill-green-400', 'fill-yellow-400', 'fill-red-500', 'fill-blue-300', 'fill-amber-300', 'fill-sky-400', 'fill-orange-400', 'fill-fuchsia-600');
+            area.classList.add(colorClass);
+            
+            // Saves the current level as a data attribute for the tooltip
+            area.dataset.level = colorConfig[level].text;
+        });
+    }
+
+    /**
+     * Updates the legend to reflect the current parameter.
+     * @param {string} parameter - The parameter key (e.g., 'noise').
+     */
+    function updateLegend(parameter) {
+        const colorConfig = config[parameter];
+        legendContainer.innerHTML = ''; // Clears the previous legend
+
+        for (const level in colorConfig) {
+            const item = colorConfig[level];
+            const legendElement = document.createElement('div');
+            legendElement.classList.add('flex', 'items-center', 'space-x-2');
+            legendElement.innerHTML = `
+                <span class="w-4 h-4 rounded-full ${item.color}"></span>
+                <span class="text-sm text-gray-600">${item.text}</span>
+            `;
+            legendContainer.appendChild(legendElement);
+        }
+    }
+    
+    // --- TOOLTIP HANDLING ---
+    
+    mapAreas.forEach(area => {
+        area.addEventListener('mousemove', (e) => {
+            const areaName = area.dataset.name;
+            const currentLevel = area.dataset.level;
+            tooltip.style.display = 'block';
+            tooltip.style.left = `${e.pageX + 15}px`;
+            tooltip.style.top = `${e.pageY + 15}px`;
+            tooltip.innerHTML = `<strong>${areaName}</strong><br>${select.options[select.selectedIndex].text}: ${currentLevel}`;
+        });
+        
+        area.addEventListener('mouseleave', () => {
+            tooltip.style.display = 'none';
+        });
+    });
+
+    // --- EVENT LISTENER & INITIALIZATION ---
+
+    // Updates the map when the user changes the selection
+    select.addEventListener('change', (e) => {
+        const chosenParameter = e.target.value;
+        const currentHour = parseInt(timeSlider.value);
+        updateMap(chosenParameter, currentHour);
+        updateLegend(chosenParameter);
+    });
+
+    // 時間スライダーの変更を監視
+    timeSlider.addEventListener('input', (e) => {
+        const hour = parseInt(e.target.value);
+        currentTimeDisplay.textContent = formatTime(hour);
+        
+        const chosenParameter = select.value;
+        updateMap(chosenParameter, hour);
+    });
+
+    // Initializes the map and legend to the default state on page load
+    window.addEventListener('load', () => {
+        const initialParameter = select.value;
+        const initialHour = parseInt(timeSlider.value);
+        
+        currentTimeDisplay.textContent = formatTime(initialHour);
+        updateMap(initialParameter, initialHour);
+        updateLegend(initialParameter);
+    });
+
+</script>
+
+</body>
+</html>
