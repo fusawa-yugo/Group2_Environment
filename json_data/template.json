@@ -1,10 +1,9 @@
 {
-  "time": [
+  "houts": [
     {
-      "timestamp": "2025-06-11T10:00:00Z",
+      "hour": 10,
       "rooms": {
         "room_a": {
-          "room_id": "room_a",
           "noise": 65.2,
           "brightness": 106.9,
           "crowd": 0.94,
@@ -14,7 +13,6 @@
           "score_socializing": 3.1
         },
         "room_b": {
-          "room_id": "room_b",
           "noise": 54.4,
           "brightness": 289.9,
           "crowd": 0.53,
@@ -24,7 +22,6 @@
           "score_socializing": 2.0
         },
         "room_c": {
-          "room_id": "room_c",
           "noise": 31.9,
           "brightness": 415.4,
           "crowd": 0.35,
@@ -34,7 +31,6 @@
           "score_socializing": 4.8
         },
         "room_d": {
-          "room_id": "room_d",
           "noise": 59.3,
           "brightness": 142.5,
           "crowd": 0.93,
@@ -44,7 +40,6 @@
           "score_socializing": 2.8
         },
         "room_e": {
-          "room_id": "room_e",
           "noise": 58.2,
           "brightness": 132.9,
           "crowd": 0.48,
@@ -56,10 +51,9 @@
       }
     },
     {
-      "timestamp": "2025-06-11T10:10:00Z",
+      "hour": 11,
       "rooms": {
         "room_a": {
-          "room_id": "room_a",
           "noise": 57.3,
           "brightness": 235.5,
           "crowd": 0.06,
@@ -69,7 +63,6 @@
           "score_socializing": 3.2
         },
         "room_b": {
-          "room_id": "room_b",
           "noise": 49.9,
           "brightness": 497.5,
           "crowd": 0.63,
@@ -79,7 +72,6 @@
           "score_socializing": 2.6
         },
         "room_c": {
-          "room_id": "room_c",
           "noise": 54.0,
           "brightness": 356.6,
           "crowd": 0.28,
@@ -89,7 +81,6 @@
           "score_socializing": 4.0
         },
         "room_d": {
-          "room_id": "room_d",
           "noise": 58.5,
           "brightness": 117.3,
           "crowd": 0.62,
@@ -99,7 +90,6 @@
           "score_socializing": 4.7
         },
         "room_e": {
-          "room_id": "room_e",
           "noise": 50.3,
           "brightness": 413.3,
           "crowd": 0.4,
@@ -111,10 +101,9 @@
       }
     },
     {
-      "timestamp": "2025-06-11T10:20:00Z",
+      "hour": 12,
       "rooms": {
         "room_a": {
-          "room_id": "room_a",
           "noise": 55.3,
           "brightness": 349.9,
           "crowd": 0.87,
@@ -124,7 +113,6 @@
           "score_socializing": 3.1
         },
         "room_b": {
-          "room_id": "room_b",
           "noise": 43.3,
           "brightness": 361.6,
           "crowd": 0.08,
@@ -134,7 +122,6 @@
           "score_socializing": 2.4
         },
         "room_c": {
-          "room_id": "room_c",
           "noise": 60.0,
           "brightness": 465.6,
           "crowd": 0.0,
@@ -144,7 +131,6 @@
           "score_socializing": 4.5
         },
         "room_d": {
-          "room_id": "room_d",
           "noise": 65.7,
           "brightness": 457.5,
           "crowd": 0.03,
@@ -154,7 +140,6 @@
           "score_socializing": 3.1
         },
         "room_e": {
-          "room_id": "room_e",
           "noise": 45.8,
           "brightness": 420.1,
           "crowd": 0.27,
@@ -166,10 +151,9 @@
       }
     },
     {
-      "timestamp": "2025-06-11T10:30:00Z",
+      "hour": 13,
       "rooms": {
         "room_a": {
-          "room_id": "room_a",
           "noise": 60.7,
           "brightness": 296.4,
           "crowd": 0.72,
@@ -179,7 +163,6 @@
           "score_socializing": 4.9
         },
         "room_b": {
-          "room_id": "room_b",
           "noise": 56.3,
           "brightness": 261.0,
           "crowd": 0.99,
@@ -189,7 +172,6 @@
           "score_socializing": 4.1
         },
         "room_c": {
-          "room_id": "room_c",
           "noise": 42.7,
           "brightness": 282.0,
           "crowd": 0.74,
@@ -199,7 +181,6 @@
           "score_socializing": 4.0
         },
         "room_d": {
-          "room_id": "room_d",
           "noise": 31.1,
           "brightness": 169.3,
           "crowd": 0.83,
@@ -209,7 +190,6 @@
           "score_socializing": 4.8
         },
         "room_e": {
-          "room_id": "room_e",
           "noise": 51.8,
           "brightness": 419.2,
           "crowd": 0.1,
@@ -221,10 +201,9 @@
       }
     },
     {
-      "timestamp": "2025-06-11T10:40:00Z",
+      "hour": 14,
       "rooms": {
         "room_a": {
-          "room_id": "room_a",
           "noise": 35.0,
           "brightness": 144.1,
           "crowd": 0.37,
@@ -234,7 +213,6 @@
           "score_socializing": 4.5
         },
         "room_b": {
-          "room_id": "room_b",
           "noise": 62.7,
           "brightness": 342.2,
           "crowd": 0.07,
@@ -244,7 +222,6 @@
           "score_socializing": 1.3
         },
         "room_c": {
-          "room_id": "room_c",
           "noise": 51.2,
           "brightness": 338.1,
           "crowd": 0.57,
@@ -254,7 +231,6 @@
           "score_socializing": 3.2
         },
         "room_d": {
-          "room_id": "room_d",
           "noise": 34.6,
           "brightness": 262.7,
           "crowd": 0.08,
@@ -264,7 +240,6 @@
           "score_socializing": 1.3
         },
         "room_e": {
-          "room_id": "room_e",
           "noise": 46.7,
           "brightness": 440.0,
           "crowd": 0.28,
@@ -276,10 +251,9 @@
       }
     },
     {
-      "timestamp": "2025-06-11T10:50:00Z",
+      "hour": 15,
       "rooms": {
         "room_a": {
-          "room_id": "room_a",
           "noise": 69.2,
           "brightness": 166.5,
           "crowd": 0.84,
@@ -289,7 +263,6 @@
           "score_socializing": 3.6
         },
         "room_b": {
-          "room_id": "room_b",
           "noise": 35.2,
           "brightness": 110.1,
           "crowd": 0.74,
@@ -299,7 +272,6 @@
           "score_socializing": 2.8
         },
         "room_c": {
-          "room_id": "room_c",
           "noise": 42.6,
           "brightness": 163.3,
           "crowd": 0.65,
@@ -309,7 +281,6 @@
           "score_socializing": 4.0
         },
         "room_d": {
-          "room_id": "room_d",
           "noise": 42.4,
           "brightness": 117.1,
           "crowd": 0.58,
@@ -319,7 +290,6 @@
           "score_socializing": 2.5
         },
         "room_e": {
-          "room_id": "room_e",
           "noise": 32.8,
           "brightness": 142.5,
           "crowd": 0.78,
