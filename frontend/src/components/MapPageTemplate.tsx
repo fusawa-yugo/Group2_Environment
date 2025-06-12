@@ -5,6 +5,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Data from "../../../json_data/template.json"
 
 
+
 // --- Types and Data ---
 type InputData = {
   hours: TimeStatus[];
