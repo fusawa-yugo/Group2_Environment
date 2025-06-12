@@ -1,5 +1,6 @@
 from db.query import *
 from data.builder import generate_mockup_json
+from data.data_preparation import *
 from config import SENSORS
 from datetime import datetime, timedelta
 import pandas as pd
@@ -28,20 +29,24 @@ def main():
         sensor_data[column] = query_sensor_data(cursor, table, column, limit=100)
     """
 
-    intervals = [10, 12, 14, 16, 18]
-    # 10-12
-    time_start, time_end = get_timestamp_intervals(intervals[0], intervals[2])
-    noise_data = query_noise_sensor(cursor, time_start, time_end)
-    light_data = query_light_sensor(cursor, time_start, time_end)
-    esms_data = query_esms_sensor(cursor, time_start, time_end)
+    intervals = [10, 12, 14, 16]
+    hours_json = []
+    for i in range(len(intervals)):
+        print("interval: ", i)
+        time_start, time_end = get_timestamp_intervals(intervals[i], intervals[i]+2)
+        noise_data = query_noise_sensor(cursor, time_start, time_end)
+        light_data = query_light_sensor(cursor, time_start, time_end)
+        esms_data = query_esms_sensor(cursor, time_start, time_end)
 
+        data = organize_data(noise_data, light_data, esms_data, intervals[i])
+        hours_json.append(data)
 
+    final_json = {"hours": hours_json}
 
-    print("prova stampa sensor_data")
-    print(noise_data)
+    print(final_json["hours"][0])
 
-    #organized_data = generate_mockup_json()
-    #save_to_json(organized_data)
+    with open("../json_data/output.json", "w") as f:
+        json.dump(final_json, f, indent=2)
 
     cursor.close()
     conn.close()
