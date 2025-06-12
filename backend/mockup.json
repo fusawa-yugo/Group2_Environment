@@ -1,0 +1,304 @@
+{
+  "hours": [
+    {
+      "hour": 10,
+      "rooms": {
+        "room_a": {
+          "noise": 36.9,
+          "brightness": 428.9,
+          "crowd": 0.77,
+          "score_study": 3.9,
+          "score_relaxing": 4.5,
+          "score_eating": 1.4,
+          "score_socializing": 1.4
+        },
+        "room_b": {
+          "noise": 62.4,
+          "brightness": 457.4,
+          "crowd": 0.69,
+          "score_study": 2.0,
+          "score_relaxing": 3.8,
+          "score_eating": 2.8,
+          "score_socializing": 2.3
+        },
+        "room_c": {
+          "noise": 31.8,
+          "brightness": 112.6,
+          "crowd": 0.37,
+          "score_study": 2.8,
+          "score_relaxing": 1.4,
+          "score_eating": 4.3,
+          "score_socializing": 3.0
+        },
+        "room_d": {
+          "noise": 38.2,
+          "brightness": 236.9,
+          "crowd": 0.0,
+          "score_study": 1.8,
+          "score_relaxing": 4.7,
+          "score_eating": 1.6,
+          "score_socializing": 5.0
+        },
+        "room_e": {
+          "noise": 59.0,
+          "brightness": 208.3,
+          "crowd": 0.94,
+          "score_study": 3.5,
+          "score_relaxing": 5.0,
+          "score_eating": 3.7,
+          "score_socializing": 4.4
+        }
+      }
+    },
+    {
+      "hour": 11,
+      "rooms": {
+        "room_a": {
+          "noise": 35.8,
+          "brightness": 214.0,
+          "crowd": 0.52,
+          "score_study": 4.4,
+          "score_relaxing": 2.3,
+          "score_eating": 2.2,
+          "score_socializing": 2.9
+        },
+        "room_b": {
+          "noise": 69.0,
+          "brightness": 188.9,
+          "crowd": 0.48,
+          "score_study": 4.8,
+          "score_relaxing": 4.3,
+          "score_eating": 1.7,
+          "score_socializing": 1.1
+        },
+        "room_c": {
+          "noise": 33.9,
+          "brightness": 479.6,
+          "crowd": 0.22,
+          "score_study": 1.9,
+          "score_relaxing": 2.8,
+          "score_eating": 4.2,
+          "score_socializing": 1.1
+        },
+        "room_d": {
+          "noise": 59.7,
+          "brightness": 264.0,
+          "crowd": 0.3,
+          "score_study": 3.4,
+          "score_relaxing": 2.8,
+          "score_eating": 3.0,
+          "score_socializing": 4.4
+        },
+        "room_e": {
+          "noise": 39.3,
+          "brightness": 387.0,
+          "crowd": 0.69,
+          "score_study": 2.7,
+          "score_relaxing": 3.8,
+          "score_eating": 2.9,
+          "score_socializing": 4.5
+        }
+      }
+    },
+    {
+      "hour": 12,
+      "rooms": {
+        "room_a": {
+          "noise": 65.9,
+          "brightness": 365.9,
+          "crowd": 0.97,
+          "score_study": 2.4,
+          "score_relaxing": 4.9,
+          "score_eating": 3.8,
+          "score_socializing": 1.1
+        },
+        "room_b": {
+          "noise": 44.1,
+          "brightness": 170.7,
+          "crowd": 0.52,
+          "score_study": 1.5,
+          "score_relaxing": 1.1,
+          "score_eating": 1.2,
+          "score_socializing": 4.5
+        },
+        "room_c": {
+          "noise": 64.9,
+          "brightness": 471.8,
+          "crowd": 0.19,
+          "score_study": 4.1,
+          "score_relaxing": 3.5,
+          "score_eating": 2.4,
+          "score_socializing": 3.0
+        },
+        "room_d": {
+          "noise": 34.4,
+          "brightness": 487.0,
+          "crowd": 0.04,
+          "score_study": 2.3,
+          "score_relaxing": 3.4,
+          "score_eating": 4.3,
+          "score_socializing": 2.7
+        },
+        "room_e": {
+          "noise": 46.1,
+          "brightness": 319.8,
+          "crowd": 0.02,
+          "score_study": 4.9,
+          "score_relaxing": 1.9,
+          "score_eating": 2.7,
+          "score_socializing": 4.6
+        }
+      }
+    },
+    {
+      "hour": 13,
+      "rooms": {
+        "room_a": {
+          "noise": 41.7,
+          "brightness": 224.9,
+          "crowd": 0.34,
+          "score_study": 3.4,
+          "score_relaxing": 4.4,
+          "score_eating": 2.0,
+          "score_socializing": 2.0
+        },
+        "room_b": {
+          "noise": 44.2,
+          "brightness": 241.7,
+          "crowd": 0.71,
+          "score_study": 3.0,
+          "score_relaxing": 1.0,
+          "score_eating": 3.6,
+          "score_socializing": 3.2
+        },
+        "room_c": {
+          "noise": 43.9,
+          "brightness": 102.1,
+          "crowd": 0.75,
+          "score_study": 4.0,
+          "score_relaxing": 1.7,
+          "score_eating": 3.7,
+          "score_socializing": 3.9
+        },
+        "room_d": {
+          "noise": 51.8,
+          "brightness": 360.7,
+          "crowd": 0.06,
+          "score_study": 1.9,
+          "score_relaxing": 3.0,
+          "score_eating": 4.7,
+          "score_socializing": 4.8
+        },
+        "room_e": {
+          "noise": 44.1,
+          "brightness": 495.9,
+          "crowd": 0.44,
+          "score_study": 3.6,
+          "score_relaxing": 3.9,
+          "score_eating": 2.6,
+          "score_socializing": 2.9
+        }
+      }
+    },
+    {
+      "hour": 14,
+      "rooms": {
+        "room_a": {
+          "noise": 39.2,
+          "brightness": 185.8,
+          "crowd": 0.74,
+          "score_study": 1.9,
+          "score_relaxing": 1.8,
+          "score_eating": 2.3,
+          "score_socializing": 1.5
+        },
+        "room_b": {
+          "noise": 50.9,
+          "brightness": 287.6,
+          "crowd": 0.91,
+          "score_study": 3.7,
+          "score_relaxing": 1.3,
+          "score_eating": 1.0,
+          "score_socializing": 3.4
+        },
+        "room_c": {
+          "noise": 51.8,
+          "brightness": 228.2,
+          "crowd": 0.02,
+          "score_study": 2.9,
+          "score_relaxing": 1.9,
+          "score_eating": 1.8,
+          "score_socializing": 4.6
+        },
+        "room_d": {
+          "noise": 58.5,
+          "brightness": 369.6,
+          "crowd": 0.85,
+          "score_study": 1.2,
+          "score_relaxing": 2.6,
+          "score_eating": 2.8,
+          "score_socializing": 2.4
+        },
+        "room_e": {
+          "noise": 41.2,
+          "brightness": 351.6,
+          "crowd": 0.02,
+          "score_study": 2.3,
+          "score_relaxing": 4.4,
+          "score_eating": 1.7,
+          "score_socializing": 4.1
+        }
+      }
+    },
+    {
+      "hour": 15,
+      "rooms": {
+        "room_a": {
+          "noise": 57.1,
+          "brightness": 157.3,
+          "crowd": 0.54,
+          "score_study": 4.5,
+          "score_relaxing": 3.9,
+          "score_eating": 2.8,
+          "score_socializing": 1.8
+        },
+        "room_b": {
+          "noise": 34.3,
+          "brightness": 456.3,
+          "crowd": 0.5,
+          "score_study": 1.4,
+          "score_relaxing": 5.0,
+          "score_eating": 5.0,
+          "score_socializing": 4.4
+        },
+        "room_c": {
+          "noise": 30.3,
+          "brightness": 234.5,
+          "crowd": 0.25,
+          "score_study": 1.9,
+          "score_relaxing": 2.8,
+          "score_eating": 3.6,
+          "score_socializing": 4.6
+        },
+        "room_d": {
+          "noise": 30.2,
+          "brightness": 112.6,
+          "crowd": 0.63,
+          "score_study": 5.0,
+          "score_relaxing": 1.5,
+          "score_eating": 4.5,
+          "score_socializing": 2.5
+        },
+        "room_e": {
+          "noise": 50.2,
+          "brightness": 383.0,
+          "crowd": 0.28,
+          "score_study": 4.4,
+          "score_relaxing": 1.4,
+          "score_eating": 3.0,
+          "score_socializing": 2.0
+        }
+      }
+    }
+  ]
+}

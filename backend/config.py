@@ -8,5 +8,5 @@ DB_CONFIG = {
 
 SENSORS = {
     "plugin_ambient_noise": "double_decibels",
-    "plugin_ambient_light": "double_light_lux",
+    "light": "double_light_lux",
 }
