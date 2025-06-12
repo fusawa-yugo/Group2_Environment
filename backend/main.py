@@ -1,41 +1,51 @@
-import mysql.connector
-import json
-from datetime import datetime
+from db.query import *
+from data.builder import generate_mockup_json
+from config import SENSORS
+from datetime import datetime, timedelta
+import pandas as pd
 
-# Connect to MySQL
-conn = mysql.connector.connect(
-    host="localhost",
-    user="your_username",
-    password="your_password",
-    database="your_database"
-)
-cursor = conn.cursor(dictionary=True)
+def get_timestamp_intervals(hour_start, hour_end):
+    now = datetime.now()
 
-# Define your query (adjust to your schema!)
-cursor.execute("SELECT * FROM room_data")
-rows = cursor.fetchall()
+    # Crea i datetime per oggi all'ora specificata
+    start_time = now.replace(hour=hour_start, minute=0, second=0, microsecond=0)
+    end_time = now.replace(hour=hour_end, minute=0, second=0, microsecond=0)
 
-# Group rows by timestamp and room
-grouped = {}
-for row in rows:
-    time_id = row['timestamp'].isoformat() + "Z"
-    room_id = row['room']
-    if time_id not in grouped:
-        grouped[time_id] = {"time_id": time_id, "rooms": {}}
-    grouped[time_id]["rooms"][room_id] = {
-        "room_id": room_id,
-        "noise": row["noise"],
-        "brightness": row["brightness"],
-        "crowd": row["crowd"],
-        "score_study": row["score_study"],
-        "score_relaxing": row["score_relaxing"],
-        "score_eating": row["score_eating"],
-        "score_socializing": row["score_socializing"]
-    }
+    # Convertili in timestamp in millisecondi
+    start_timestamp = int(start_time.timestamp() * 1000)
+    end_timestamp = int(end_time.timestamp() * 1000)
+    return start_timestamp, end_timestamp
 
-# Save to JSON
-with open("room_data.json", "w") as f:
-    json.dump({"time": list(grouped.values())}, f, indent=2)
 
-cursor.close()
-conn.close()
+
+def main():
+    conn = get_connection()
+    cursor = conn.cursor(dictionary=True)
+
+    """
+    sensor_data = {}
+    for table, column in SENSORS.items():
+        sensor_data[column] = query_sensor_data(cursor, table, column, limit=100)
+    """
+
+    intervals = [10, 12, 14, 16, 18]
+    # 10-12
+    time_start, time_end = get_timestamp_intervals(intervals[0], intervals[2])
+    noise_data = query_noise_sensor(cursor, time_start, time_end)
+    light_data = query_light_sensor(cursor, time_start, time_end)
+    esms_data = query_esms_sensor(cursor, time_start, time_end)
+
+
+
+    print("prova stampa sensor_data")
+    print(noise_data)
+
+    #organized_data = generate_mockup_json()
+    #save_to_json(organized_data)
+
+    cursor.close()
+    conn.close()
+
+if __name__ == "__main__":
+    main()
+    #print(get_timestamp_intervals(10, 12))
