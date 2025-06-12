@@ -18,6 +18,23 @@ type TimeStatus = {
 
 type AreaName = "room_a" | "room_b" | "room_c" | "room_d" | "room_e" | "room_f" | "room_g" | "room_h";
 
+type AreaConfigType = {
+	[key in AreaName]: {
+		name: string
+	}
+}
+
+const AreaConfig: AreaConfigType ={
+  room_a: { name: "Room A" },
+  room_b: { name: "Room B" },
+  room_c: { name: "Room C" },
+  room_d: { name: "Room D" },
+  room_e: { name: "Room E" },
+  room_f: { name: "Room F" },
+  room_g: { name: "Room G" },
+  room_h: { name: "Room H" }
+}
+
 type RoomStatus = {
   noise: number;
   brightness: number;
@@ -122,14 +139,14 @@ const TimeSlider: React.FC<TimeSliderProps> = ({
   time,
   setTime,
   startTime = 10,
-  endTime = 18,
+  endTime = 16,
   step = 2
 }) => {
   const formatTime = (hour: number) => `${hour.toString().padStart(2, '0')}:00`;
 
   return (
     <div className="flex flex-col w-full p-2">
-      <label htmlFor="time-range" className="text-gray-700 mb-2">Time: <span className="font-semibold">{formatTime(time)}</span></label>
+      <label htmlFor="time-range" className="text-gray-700 mb-2">Time: <span className="font-semibold">{`${formatTime(time)} - ${formatTime(time + step)}`}</span></label>
       <input
         id="time-range"
         type="range"
@@ -273,7 +290,7 @@ const MapComponent: React.FC<MapComponentProps> = ({ plotData, selectedParameter
     // tooltip イベントハンドラ
     const handleMouseEnter = (e: Event) => {
       const area = e.currentTarget as SVGElement;
-      const name = area.getAttribute('data-name');
+      const name = AreaConfig[area.id as AreaName]?.name || area.id;
       const level = area.getAttribute('data-level');
       tooltip.innerHTML = `<strong>${name}</strong><br>${OptionConfig[selectedParameterKey].textHigher}: ${level}`;
       tooltip.style.display = 'block';
@@ -507,11 +524,11 @@ const MapPageTemplate: React.FC = () => {
   const plotData = preparePlotData(selectedTime, selectedParameterKey);
 
   return (
-    <div className="max-w-[1200px] mx-auto p-4 space-y-6">
-      <header className="w-full border-b border-gray-300 p-2 sticky top-0 left-0 bg-white z-100">
+    <div className="w-full mx-auto p-4 space-y-6 flex flex-col items-center max-w-[1200px]">
+      <header className="flex flex-col items-center w-full  border-b border-gray-300 p-2 sticky top-0 left-0 bg-white z-100">
         <h1 className="text-xl font-bold text-center mb-4">Area Status Visualization</h1>
 
-        <div className="flex justify-center items-center mb-2 gap-3">
+        <div className="flex justify-center items-center mb-2 gap-10 w-full">
           <div className="flex-1">
             <SenseSelector
               options={SelectOptions}
@@ -520,7 +537,7 @@ const MapPageTemplate: React.FC = () => {
               label="Select Parameter"
             />
           </div>
-          <div className="flex flex-col flex-2 items-center">
+          <div className="flex flex-col flex-2  items-center">
             <TimeSlider time={selectedTime} setTime={setSelectedTime} />
             <Legend
               color={OptionConfig[selectedParameterKey].color}
