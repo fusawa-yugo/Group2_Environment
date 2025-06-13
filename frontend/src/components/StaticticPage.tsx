@@ -61,7 +61,7 @@ const ScoreBar: React.FC<ScoreBarProps> = ({
       <BarChart data={chartData}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="rating" label={{ value: 'rating', position: 'insideBottom', offset: -5 }} />
-        <YAxis label={{ value: 'number', angle: -90, position: 'insideLeft' }} />
+        <YAxis label={{ value: 'count', angle: -90, position: 'insideLeft' }} />
         <Tooltip />
         <Bar dataKey="count" fill="#8884d8" />
       </BarChart>
