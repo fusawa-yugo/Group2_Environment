@@ -3,7 +3,6 @@ import json
 from config import ACTIVITIES
 
 def organize_data(noise_data, light_data, esms_data, hours_interval):
-    print("HIIIIIII")
     df_noise = pd.DataFrame(noise_data)
     df_light = pd.DataFrame(light_data)
     df_esms = pd.DataFrame(esms_data)
@@ -74,12 +73,13 @@ def organize_data(noise_data, light_data, esms_data, hours_interval):
 
     # Normalize data
     a, b = 0, 1
-    x_min_noise = 45
-    x_max_noise = 65
+    x_min_noise = 20
+    x_max_noise = 100
     x_min_light = 0
     x_max_light = 500
     objective_data['Noise_norm'] = a + (objective_data['Noise'] - x_min_noise) / (x_max_noise - x_min_noise) * (b - a)
     objective_data['Light_norm'] = a + (objective_data['Light'] - x_min_light) / (x_max_light - x_min_light) * (b - a)
+
 
     perception_noise = final_df.groupby(['Location'], as_index=False)['Noise_perception'].mean()
     perception_light = final_df.groupby(['Location'], as_index=False)['Light_perception'].mean()
@@ -87,8 +87,10 @@ def organize_data(noise_data, light_data, esms_data, hours_interval):
     perception_crowd = final_df.groupby(['Location'], as_index=False)['Crowdness_perception'].mean()
     perception_score = final_df.groupby(['Location', 'Activity'], as_index=False)['Score'].mean()
 
+    print(perception_noise)
+
     rooms = {}
-    for loc in perception_noise['Location'].unique():
+    for loc in objective_data['Location'].unique():
         room_data = {
             "noise": float(objective_data[objective_data['Location'] == loc]['Noise_norm'].values[0]),
             "brightness": float(objective_data[objective_data['Location'] == loc]['Light_norm'].values[0]),
