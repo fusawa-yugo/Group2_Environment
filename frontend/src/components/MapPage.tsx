@@ -213,7 +213,7 @@ const Legend: React.FC<LegendProps> = ({
   unit = undefined
 }) => {
   return (
-    <div className="flex items-center space-x-4 p-2 rounded-lg bg-gray-50 flex-wrap justify-center gap-1 w-full">
+    <div className="flex items-center space-x-4 p-1 rounded-lg bg-gray-50 flex-wrap justify-center gap-1 w-full">
         <p className="text-sm text-gray-700">{textLower}</p>
       { minScore !== undefined && (
         <p className='text-sm'>{minScore}{unit ? ` ${unit}` : ''}</p>
@@ -403,7 +403,7 @@ const MapPage: React.FC = () => {
 
   return (
     <div className="w-full mx-auto p-4 space-y-6 flex flex-col items-center max-w-[1200px]">
-      <header className="flex flex-col items-center w-full  border-b border-gray-300 p-2 sticky top-0 left-0 bg-white z-100">
+      <header className="flex flex-col items-center w-full  border-b border-gray-300 p-1 sticky top-0 left-0 bg-white z-100 m-0">
         <h1 className="text-xl font-bold text-center mb-4">Area Status Visualization</h1>
 
         <div className="flex justify-center items-center mb-2 gap-10 w-full">
