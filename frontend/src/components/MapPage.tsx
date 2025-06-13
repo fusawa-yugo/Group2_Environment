@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 
 import RawData from "../../../json_data/output_mockup.json"
 
-import { OrganizeData } from '../lib';
+import { OrganizeData } from '../lib/OrganizeMapData';
 
 
 import BackgroundMap from '../assets/darker_map.png';
