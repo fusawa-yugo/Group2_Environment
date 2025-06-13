@@ -4,16 +4,74 @@
       "hour": 10,
       "rooms": {
         "Cafeteria Lipasto": {
-          "noise": 1.0993740159606282,
-          "brightness": 0.0915988286336263,
-          "crowd": 4.333333333333333,
-          "score_Eating or drinking": null
+          "noise": 0.939,
+          "brightness": 0.5336,
+          "crowd": 0.6012,
+          "score_studying_alone": 0.1079,
+          "score_commuting_waiting": 0.0553,
+          "score_lecture": 0.5131,
+          "score_event": 0.2275,
+          "score_group_study": 0.9866
         },
         "UBI Cafe": {
-          "noise": 0.876664387066505,
-          "brightness": 0.0819727611541748,
-          "crowd": 2.75,
-          "score_Eating or drinking": 3.75
+          "noise": 0.7965,
+          "brightness": 0.5416,
+          "crowd": 0.518,
+          "score_studying_alone": 0.0498,
+          "score_commuting_waiting": 0.7019,
+          "score_lecture": 0.4533,
+          "score_event": 0.9835,
+          "score_group_study": 0.3208
+        },
+        "library pegasus": {
+          "noise": 0.2944,
+          "brightness": 0.9801,
+          "crowd": 0.6082,
+          "score_studying_alone": 0.0758,
+          "score_commuting_waiting": 0.3623,
+          "score_lecture": 0.3657,
+          "score_event": 0.544,
+          "score_group_study": 0.5059
+        },
+        "Cafeteria julinia (oamk)": {
+          "noise": 0.8015,
+          "brightness": 0.3856,
+          "crowd": 0.9222,
+          "score_studying_alone": 0.3758,
+          "score_commuting_waiting": 0.307,
+          "score_lecture": 0.0289,
+          "score_event": 0.2352,
+          "score_group_study": 0.4822
+        },
+        "PSOAS study / room 131": {
+          "noise": 0.6537,
+          "brightness": 0.5202,
+          "crowd": 0.9709,
+          "score_studying_alone": 0.0495,
+          "score_commuting_waiting": 0.1281,
+          "score_lecture": 0.9084,
+          "score_event": 0.6526,
+          "score_group_study": 0.0358
+        },
+        "Oulun normal high school": {
+          "noise": 0.8872,
+          "brightness": 0.6655,
+          "crowd": 0.7882,
+          "score_studying_alone": 0.8332,
+          "score_commuting_waiting": 0.2377,
+          "score_lecture": 0.1793,
+          "score_event": 0.1508,
+          "score_group_study": 0.4531
+        },
+        "Tellus (nokia box)": {
+          "noise": 0.9393,
+          "brightness": 0.8567,
+          "crowd": 0.2439,
+          "score_studying_alone": 0.634,
+          "score_commuting_waiting": 0.572,
+          "score_lecture": 0.1851,
+          "score_event": 0.5831,
+          "score_group_study": 0.6655
         }
       }
     },
@@ -21,68 +79,224 @@
       "hour": 12,
       "rooms": {
         "Cafeteria Lipasto": {
-          "noise": 1.1696827164170571,
-          "brightness": 0.07493674468994141,
-          "crowd": 2.0,
-          "score_Resting": null
-        },
-        "Cafeteria julinia (oamk)": {
-          "noise": 0.5957776070709186,
-          "brightness": 0.02613198184967041,
-          "crowd": 2.0,
-          "score_Resting": null
-        },
-        "Oulun normal high school": {
-          "noise": 0.7560782425346104,
-          "brightness": 0.029043525695800782,
-          "crowd": 1.0,
-          "score_Resting": null
+          "noise": 0.5206,
+          "brightness": 0.3495,
+          "crowd": 0.4794,
+          "score_studying_alone": 0.6757,
+          "score_commuting_waiting": 0.2414,
+          "score_lecture": 0.186,
+          "score_event": 0.1855,
+          "score_group_study": 0.5284
         },
         "UBI Cafe": {
-          "noise": 0.34869033188423443,
-          "brightness": 0.05552476162380643,
-          "crowd": 4.0,
-          "score_Resting": 3.0
+          "noise": 0.8982,
+          "brightness": 0.177,
+          "crowd": 0.6103,
+          "score_studying_alone": 0.7006,
+          "score_commuting_waiting": 0.0518,
+          "score_lecture": 0.0284,
+          "score_event": 0.228,
+          "score_group_study": 0.7083
         },
         "library pegasus": {
-          "noise": 1.9396980668962975,
-          "brightness": 0.7103438110351562,
-          "crowd": 2.0,
-          "score_Resting": null
+          "noise": 0.171,
+          "brightness": 0.8214,
+          "crowd": 0.4887,
+          "score_studying_alone": 0.5404,
+          "score_commuting_waiting": 0.9383,
+          "score_lecture": 0.0874,
+          "score_event": 0.62,
+          "score_group_study": 0.8044
+        },
+        "Cafeteria julinia (oamk)": {
+          "noise": 0.2694,
+          "brightness": 0.3676,
+          "crowd": 0.1134,
+          "score_studying_alone": 0.4993,
+          "score_commuting_waiting": 0.4128,
+          "score_lecture": 0.635,
+          "score_event": 0.935,
+          "score_group_study": 0.5397
+        },
+        "PSOAS study / room 131": {
+          "noise": 0.5685,
+          "brightness": 0.1937,
+          "crowd": 0.4986,
+          "score_studying_alone": 0.7214,
+          "score_commuting_waiting": 0.5138,
+          "score_lecture": 0.3106,
+          "score_event": 0.3068,
+          "score_group_study": 0.1957
+        },
+        "Oulun normal high school": {
+          "noise": 0.8705,
+          "brightness": 0.4062,
+          "crowd": 0.0592,
+          "score_studying_alone": 0.9353,
+          "score_commuting_waiting": 0.6086,
+          "score_lecture": 0.8778,
+          "score_event": 0.6818,
+          "score_group_study": 0.6096
+        },
+        "Tellus (nokia box)": {
+          "noise": 0.8454,
+          "brightness": 0.1212,
+          "crowd": 0.3452,
+          "score_studying_alone": 0.3407,
+          "score_commuting_waiting": 0.1834,
+          "score_lecture": 0.565,
+          "score_event": 0.3691,
+          "score_group_study": 0.4102
         }
       }
     },
     {
       "hour": 14,
       "rooms": {
+        "Cafeteria Lipasto": {
+          "noise": 0.6497,
+          "brightness": 0.0042,
+          "crowd": 0.6522,
+          "score_studying_alone": 0.4613,
+          "score_commuting_waiting": 0.2516,
+          "score_lecture": 0.4579,
+          "score_event": 0.0821,
+          "score_group_study": 0.5839
+        },
         "UBI Cafe": {
-          "noise": 0.6237003310621304,
-          "brightness": 0.028428801536560057,
-          "crowd": 1.5,
-          "score_Resting": null
+          "noise": 0.8785,
+          "brightness": 0.3325,
+          "crowd": 0.4805,
+          "score_studying_alone": 0.4331,
+          "score_commuting_waiting": 0.2793,
+          "score_lecture": 0.9268,
+          "score_event": 0.9772,
+          "score_group_study": 0.2772
         },
         "library pegasus": {
-          "noise": 0.8507301133053382,
-          "brightness": 0.2460685157775879,
-          "crowd": 3.0,
-          "score_Resting": null
+          "noise": 0.5446,
+          "brightness": 0.9174,
+          "crowd": 0.8658,
+          "score_studying_alone": 0.6806,
+          "score_commuting_waiting": 0.8626,
+          "score_lecture": 0.195,
+          "score_event": 0.1961,
+          "score_group_study": 0.6325
+        },
+        "Cafeteria julinia (oamk)": {
+          "noise": 0.1193,
+          "brightness": 0.9534,
+          "crowd": 0.1171,
+          "score_studying_alone": 0.4117,
+          "score_commuting_waiting": 0.9958,
+          "score_lecture": 0.087,
+          "score_event": 0.3061,
+          "score_group_study": 0.2099
+        },
+        "PSOAS study / room 131": {
+          "noise": 0.7152,
+          "brightness": 0.1181,
+          "crowd": 0.6108,
+          "score_studying_alone": 0.1849,
+          "score_commuting_waiting": 0.3008,
+          "score_lecture": 0.7307,
+          "score_event": 0.9809,
+          "score_group_study": 0.1154
+        },
+        "Oulun normal high school": {
+          "noise": 0.7613,
+          "brightness": 0.7316,
+          "crowd": 0.0655,
+          "score_studying_alone": 0.4357,
+          "score_commuting_waiting": 0.2527,
+          "score_lecture": 0.7822,
+          "score_event": 0.604,
+          "score_group_study": 0.4486
+        },
+        "Tellus (nokia box)": {
+          "noise": 0.1051,
+          "brightness": 0.7569,
+          "crowd": 0.336,
+          "score_studying_alone": 0.8645,
+          "score_commuting_waiting": 0.3498,
+          "score_lecture": 0.7423,
+          "score_event": 0.8313,
+          "score_group_study": 0.2656
         }
       }
     },
     {
       "hour": 16,
       "rooms": {
-        "Tellus (nokia box)": {
-          "noise": 0.5245085444651174,
-          "brightness": 0.035165233612060545,
-          "crowd": 4.0,
-          "score_": null
+        "Cafeteria Lipasto": {
+          "noise": 0.3083,
+          "brightness": 0.4038,
+          "crowd": 0.2751,
+          "score_studying_alone": 0.7614,
+          "score_commuting_waiting": 0.9667,
+          "score_lecture": 0.5481,
+          "score_event": 0.3649,
+          "score_group_study": 0.6458
+        },
+        "UBI Cafe": {
+          "noise": 0.8798,
+          "brightness": 0.419,
+          "crowd": 0.2067,
+          "score_studying_alone": 0.721,
+          "score_commuting_waiting": 0.4913,
+          "score_lecture": 0.5842,
+          "score_event": 0.8669,
+          "score_group_study": 0.1489
         },
         "library pegasus": {
-          "noise": 1.0194287362052257,
-          "brightness": 0.36327257442474364,
-          "crowd": 4.5,
-          "score_": null
+          "noise": 0.5233,
+          "brightness": 0.5343,
+          "crowd": 0.4342,
+          "score_studying_alone": 0.1499,
+          "score_commuting_waiting": 0.3351,
+          "score_lecture": 0.0789,
+          "score_event": 0.3773,
+          "score_group_study": 0.7334
+        },
+        "Cafeteria julinia (oamk)": {
+          "noise": 0.0784,
+          "brightness": 0.5709,
+          "crowd": 0.9801,
+          "score_studying_alone": 0.5338,
+          "score_commuting_waiting": 0.9895,
+          "score_lecture": 0.9187,
+          "score_event": 0.4624,
+          "score_group_study": 0.0109
+        },
+        "PSOAS study / room 131": {
+          "noise": 0.3119,
+          "brightness": 0.5569,
+          "crowd": 0.3429,
+          "score_studying_alone": 0.2518,
+          "score_commuting_waiting": 0.8959,
+          "score_lecture": 0.7048,
+          "score_event": 0.8352,
+          "score_group_study": 0.1943
+        },
+        "Oulun normal high school": {
+          "noise": 0.996,
+          "brightness": 0.5234,
+          "crowd": 0.6095,
+          "score_studying_alone": 0.2197,
+          "score_commuting_waiting": 0.5935,
+          "score_lecture": 0.7035,
+          "score_event": 0.6713,
+          "score_group_study": 0.9395
+        },
+        "Tellus (nokia box)": {
+          "noise": 0.3365,
+          "brightness": 0.8645,
+          "crowd": 0.4644,
+          "score_studying_alone": 0.2487,
+          "score_commuting_waiting": 0.4449,
+          "score_lecture": 0.6131,
+          "score_event": 0.2267,
+          "score_group_study": 0.1731
         }
       }
     }

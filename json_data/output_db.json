@@ -1,0 +1,134 @@
+{
+  "hours": [
+    {
+      "hour": 10,
+      "rooms": {
+        "Cafeteria Lipasto": {
+          "noise": 0.5873435039901571,
+          "brightness": 0.0915988286336263,
+          "crowd": 0.8333333333333333,
+          "score_studying_alone": null,
+          "score_commuting_waiting": null,
+          "score_lecture": null,
+          "score_event": null,
+          "score_group_study": null
+        },
+        "UBI Cafe": {
+          "noise": 0.5316660967666262,
+          "brightness": 0.0819727611541748,
+          "crowd": 0.4375,
+          "score_studying_alone": null,
+          "score_commuting_waiting": null,
+          "score_lecture": null,
+          "score_event": null,
+          "score_group_study": 3.75
+        }
+      }
+    },
+    {
+      "hour": 12,
+      "rooms": {
+        "Cafeteria Lipasto": {
+          "noise": 0.6049206791042643,
+          "brightness": 0.07493674468994141,
+          "crowd": 0.25,
+          "score_studying_alone": null,
+          "score_commuting_waiting": null,
+          "score_lecture": null,
+          "score_event": null,
+          "score_group_study": null
+        },
+        "Cafeteria julinia (oamk)": {
+          "noise": 0.46144440176772966,
+          "brightness": 0.02613198184967041,
+          "crowd": 0.25,
+          "score_studying_alone": null,
+          "score_commuting_waiting": null,
+          "score_lecture": null,
+          "score_event": null,
+          "score_group_study": null
+        },
+        "Oulun normal high school": {
+          "noise": 0.5015195606336527,
+          "brightness": 0.029043525695800782,
+          "crowd": 0.0,
+          "score_studying_alone": 5.0,
+          "score_commuting_waiting": null,
+          "score_lecture": null,
+          "score_event": null,
+          "score_group_study": null
+        },
+        "UBI Cafe": {
+          "noise": 0.3996725829710586,
+          "brightness": 0.05552476162380643,
+          "crowd": 0.75,
+          "score_studying_alone": null,
+          "score_commuting_waiting": null,
+          "score_lecture": null,
+          "score_event": null,
+          "score_group_study": 3.0
+        },
+        "library pegasus": {
+          "noise": 0.7974245167240743,
+          "brightness": 0.7103438110351562,
+          "crowd": 0.25,
+          "score_studying_alone": 5.0,
+          "score_commuting_waiting": null,
+          "score_lecture": null,
+          "score_event": null,
+          "score_group_study": null
+        }
+      }
+    },
+    {
+      "hour": 14,
+      "rooms": {
+        "UBI Cafe": {
+          "noise": 0.46842508276553263,
+          "brightness": 0.028428801536560057,
+          "crowd": 0.125,
+          "score_studying_alone": null,
+          "score_commuting_waiting": null,
+          "score_lecture": null,
+          "score_event": null,
+          "score_group_study": null
+        },
+        "library pegasus": {
+          "noise": 0.5251825283263345,
+          "brightness": 0.2460685157775879,
+          "crowd": 0.5,
+          "score_studying_alone": 4.0,
+          "score_commuting_waiting": null,
+          "score_lecture": null,
+          "score_event": null,
+          "score_group_study": null
+        }
+      }
+    },
+    {
+      "hour": 16,
+      "rooms": {
+        "Tellus (nokia box)": {
+          "noise": 0.44362713611627935,
+          "brightness": 0.035165233612060545,
+          "crowd": 0.75,
+          "score_studying_alone": null,
+          "score_commuting_waiting": null,
+          "score_lecture": null,
+          "score_event": null,
+          "score_group_study": null
+        },
+        "library pegasus": {
+          "noise": 0.5673571840513064,
+          "brightness": 0.36327257442474364,
+          "crowd": 0.875,
+          "score_studying_alone": null,
+          "score_commuting_waiting": null,
+          "score_lecture": null,
+          "score_event": 4.0,
+          "score_group_study": null
+        }
+      }
+    }
+  ]
+}
