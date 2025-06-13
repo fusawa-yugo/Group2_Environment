@@ -22,7 +22,7 @@ def query_light_sensor(cursor,time_start, time_end):
     return cursor.fetchall()
 
 def query_esms_sensor(cursor,time_start, time_end):
-    query = f"SELECT timestamp, esm_json, double_esm_user_answer_timestamp, esm_user_answer  FROM esms AS n Where n.esm_status = 2 AND n.timestamp BETWEEN {time_start} AND {time_end};"
+    query = f"SELECT timestamp, esm_json, double_esm_user_answer_timestamp, esm_user_answer, device_id  FROM esms AS n Where n.esm_status = 2 AND n.timestamp BETWEEN {time_start} AND {time_end};"
     cursor.execute(query)
     return cursor.fetchall()
 
