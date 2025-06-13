@@ -1,0 +1,90 @@
+{
+  "hours": [
+    {
+      "hour": 10,
+      "rooms": {
+        "Cafeteria Lipasto": {
+          "noise": 1.0993740159606282,
+          "brightness": 0.0915988286336263,
+          "crowd": 4.333333333333333,
+          "score_Eating or drinking": null
+        },
+        "UBI Cafe": {
+          "noise": 0.876664387066505,
+          "brightness": 0.0819727611541748,
+          "crowd": 2.75,
+          "score_Eating or drinking": 3.75
+        }
+      }
+    },
+    {
+      "hour": 12,
+      "rooms": {
+        "Cafeteria Lipasto": {
+          "noise": 1.1696827164170571,
+          "brightness": 0.07493674468994141,
+          "crowd": 2.0,
+          "score_Resting": null
+        },
+        "Cafeteria julinia (oamk)": {
+          "noise": 0.5957776070709186,
+          "brightness": 0.02613198184967041,
+          "crowd": 2.0,
+          "score_Resting": null
+        },
+        "Oulun normal high school": {
+          "noise": 0.7560782425346104,
+          "brightness": 0.029043525695800782,
+          "crowd": 1.0,
+          "score_Resting": null
+        },
+        "UBI Cafe": {
+          "noise": 0.34869033188423443,
+          "brightness": 0.05552476162380643,
+          "crowd": 4.0,
+          "score_Resting": 3.0
+        },
+        "library pegasus": {
+          "noise": 1.9396980668962975,
+          "brightness": 0.7103438110351562,
+          "crowd": 2.0,
+          "score_Resting": null
+        }
+      }
+    },
+    {
+      "hour": 14,
+      "rooms": {
+        "UBI Cafe": {
+          "noise": 0.6237003310621304,
+          "brightness": 0.028428801536560057,
+          "crowd": 1.5,
+          "score_Resting": null
+        },
+        "library pegasus": {
+          "noise": 0.8507301133053382,
+          "brightness": 0.2460685157775879,
+          "crowd": 3.0,
+          "score_Resting": null
+        }
+      }
+    },
+    {
+      "hour": 16,
+      "rooms": {
+        "Tellus (nokia box)": {
+          "noise": 0.5245085444651174,
+          "brightness": 0.035165233612060545,
+          "crowd": 4.0,
+          "score_": null
+        },
+        "library pegasus": {
+          "noise": 1.0194287362052257,
+          "brightness": 0.36327257442474364,
+          "crowd": 4.5,
+          "score_": null
+        }
+      }
+    }
+  ]
+}
