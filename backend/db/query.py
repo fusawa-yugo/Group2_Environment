@@ -26,6 +26,11 @@ def query_esms_sensor(cursor,time_start, time_end):
     cursor.execute(query)
     return cursor.fetchall()
 
+def query_bluetooth_sensor(cursor, time_start, time_end):
+    query = f"SELECT timestamp, device_id, bt_address FROM bluetooth AS b Where b.timestamp BETWEEN {time_start} AND {time_end};"
+    cursor.execute(query)
+    return cursor.fetchall()
+
 
 
 def query_sensor_data_timestamp(cursor,time_start, time_end):

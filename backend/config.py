@@ -10,3 +10,13 @@ SENSORS = {
     "plugin_ambient_noise": "double_decibels",
     "light": "double_light_lux",
 }
+
+ACTIVITIES = {
+    "studying_alone": "Studying alone",
+    "commuting_waiting": "Commuting or waiting",
+    "lecture": "Attending lecture",
+    "event": "Event (club, sports, religious/spiritual)",
+    "group_study": "Group study"
+}
+
+

@@ -1,11 +1,14 @@
 import pandas as pd
 import json
+from config import ACTIVITIES
 
 def organize_data(noise_data, light_data, esms_data, hours_interval):
+    print("HIIIIIII")
     df_noise = pd.DataFrame(noise_data)
     df_light = pd.DataFrame(light_data)
     df_esms = pd.DataFrame(esms_data)
-    print(df_esms.columns)
+    
+    print(df_esms.head())
 
     df_esms['timestamp'] = pd.to_datetime(df_esms['timestamp'], unit='ms')  # o 's' se in secondi
     df_noise['timestamp'] = pd.to_datetime(df_noise['timestamp'], unit='ms')
@@ -87,13 +90,13 @@ def organize_data(noise_data, light_data, esms_data, hours_interval):
     rooms = {}
     for loc in perception_noise['Location'].unique():
         room_data = {
-            "noise": float(noise[noise['Location'] == loc]['Noise_norm'].values[0]),
-            "brightness": float(light[light['Location'] == loc]['Light_norm'].values[0]),
+            "noise": float(objective_data[objective_data['Location'] == loc]['Noise_norm'].values[0]),
+            "brightness": float(objective_data[objective_data['Location'] == loc]['Light_norm'].values[0]),
             "crowd": float(perception_crowd[perception_crowd['Location'] == loc]['Crowdness_perception'].values[0]),
         }
 
-        for activity in ['study', 'relaxing', 'eating', 'socializing']:
-            score_row = perception_score[(perception_score['Location'] == loc) & (perception_score['Activity'] == activity)]
+        for key, value in ACTIVITIES.items():
+            score_row = perception_score[(perception_score['Location'] == loc) & (perception_score['Activity'] == value)]
             score_val = float(score_row['Score'].values[0]) if not score_row.empty else None
             room_data[f'score_{activity}'] = score_val
 

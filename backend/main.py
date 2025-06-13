@@ -2,11 +2,12 @@ from db.query import *
 from data.builder import generate_mockup_json
 from data.data_preparation import *
 from config import SENSORS
-from datetime import datetime, timedelta
+import datetime
 import pandas as pd
 
 def get_timestamp_intervals(hour_start, hour_end):
-    now = datetime.now()
+    #now = datetime.now()
+    now = datetime.datetime(2025,6,12)
 
     # Crea i datetime per oggi all'ora specificata
     start_time = now.replace(hour=hour_start, minute=0, second=0, microsecond=0)
