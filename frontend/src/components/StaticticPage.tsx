@@ -115,7 +115,6 @@ const StatisticPage: React.FC = () => {
   const areaName = areaId ? reversedAreaNameMap[areaId] || areaId : "Unknown Area";
 
   const plotData: PlotDataProps = Data.hours.find((d) => d.hour === time)?.rooms[areaName as keyof typeof Data.hours[0]['rooms']] || {};
-	console.log("Plot Data:", plotData);
 
 	return (
     <div className="flex flex-col items-center p-5">
@@ -123,6 +122,7 @@ const StatisticPage: React.FC = () => {
 				← Back
 			</Link>
       <h1 className="font-semibold mb-4">Statistics for Area: {areaId}</h1>
+			<h1>OverAll Score</h1>
 			<TimeSlider time={time} setTime={setTime} />
 			<div className="grid grid-cols-2 gap-4 w-full">
 				{Object.keys(plotData).map((key) => (
