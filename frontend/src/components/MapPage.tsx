@@ -213,7 +213,7 @@ const Legend: React.FC<LegendProps> = ({
   unit = undefined
 }) => {
   return (
-    <div className="flex items-center space-x-4 p-2 rounded-lg bg-gray-50 flex-wrap justify-center gap-1 w-full">
+    <div className="flex items-center space-x-4 p-1 rounded-lg bg-gray-50 flex-wrap justify-center gap-1 w-full">
         <p className="text-sm text-gray-700">{textLower}</p>
       { minScore !== undefined && (
         <p className='text-sm'>{minScore}{unit ? ` ${unit}` : ''}</p>
@@ -264,79 +264,85 @@ const MapComponent: React.FC<MapComponentProps> = ({ plotData, selectedParameter
     return `rgb(${r}, ${g}, ${b})`;
   };
 
-  useEffect(() => {
-    if (!mapRef.current || !tooltipRef.current) return;
+	useEffect(() => {
+		if (!mapRef.current || !tooltipRef.current) return;
 
-    const mapAreas = mapRef.current.querySelectorAll('.map-area');
-    const tooltip = tooltipRef.current;
+		const mapAreas = mapRef.current.querySelectorAll('.map-area');
+		const tooltip = tooltipRef.current;
 
-    const levels = Object.values(plotData);
+		const levels = Object.values(plotData);
 
-    //ここ注意
-    const min = OptionConfig[selectedParameterKey].minScore || Math.min(...levels);
-    const max = OptionConfig[selectedParameterKey].maxScore || Math.max(...levels);
+		const min = OptionConfig[selectedParameterKey].minScore || Math.min(...levels);
+		const max = OptionConfig[selectedParameterKey].maxScore || Math.max(...levels);
 
-    mapAreas.forEach(area => {
-      const areaId = area.id;
-      const level = plotData[areaId] || 0;
+		mapAreas.forEach(area => {
+			const areaId = area.id;
+			const level = plotData[areaId] || 0;
 
-      area.setAttribute('data-level', level.toString());
+			area.setAttribute('data-level', level.toString());
 			area.setAttribute('place-name', areaId);
-      area.setAttribute('stroke', '#000');
-      area.setAttribute('stroke-width', '10');
-      const fill = interpolateColor(level, min, max, OptionConfig[selectedParameterKey].color);
-      area.setAttribute('fill', fill);
-    });
+			area.setAttribute('stroke', '#000');
+			area.setAttribute('stroke-width', '10');
+			const fill = interpolateColor(level, min, max, OptionConfig[selectedParameterKey].color);
+			area.setAttribute('fill', fill);
+		});
 
-    // tooltip イベントハンドラ
-    const handleMouseEnter = (e: Event) => {
-      const area = e.currentTarget as SVGElement;
-      const name = AreaConfig[area.id as AreaName]?.name || area.id;
-      const level = area.getAttribute('data-level');
-      tooltip.innerHTML = `<strong>${name}</strong><br>${OptionConfig[selectedParameterKey].textHigher}: ${level}`;
-      tooltip.style.display = 'block';
-    };
+		// tooltip イベントハンドラ
+		const handleMouseEnter = (e: Event) => {
+			const area = e.currentTarget as SVGElement;
+			const name = AreaConfig[area.id as AreaName]?.name || area.id;
+			const level = area.getAttribute('data-level');
+			tooltip.innerHTML = `<strong>${name}</strong><br>${OptionConfig[selectedParameterKey].textHigher}: ${level}`;
+			tooltip.style.display = 'block';
+		};
 
-    const handleMouseMove = (e: Event) => {
-      const mouseEvent = e as MouseEvent; // Cast the event to MouseEvent
-      if (!mapRef.current || !tooltipRef.current) return;
-    
-      const mapRect = mapRef.current.getBoundingClientRect();
-      const tooltip = tooltipRef.current;
-    
-      // ビューポート基準のマップ左上からの相対座標
-      const offsetX = mouseEvent.clientX - mapRect.left;
-      const offsetY = mouseEvent.clientY - mapRect.top;
-    
-      // ツールチップをマップの相対位置で表示（+10pxの余白）
-      tooltip.style.left = `${offsetX + 10}px`;
-      tooltip.style.top = `${offsetY + 10}px`;
-    };
+		const handleMouseMove = (e: Event) => {
+			const mouseEvent = e as MouseEvent;
+			if (!mapRef.current || !tooltipRef.current) return;
 
-    const handleMouseLeave = () => {
-      tooltip.style.display = 'none';
-    };
+			const mapRect = mapRef.current.getBoundingClientRect();
+			const tooltip = tooltipRef.current;
 
-    mapAreas.forEach(area => {
-      area.addEventListener('mouseenter', handleMouseEnter);
-      area.addEventListener('mousemove', handleMouseMove);
-      area.addEventListener('mouseleave', handleMouseLeave);
-    });
+			const offsetX = mouseEvent.clientX - mapRect.left;
+			const offsetY = mouseEvent.clientY - mapRect.top;
 
-    return () => {
-      mapAreas.forEach(area => {
-        area.removeEventListener('mouseenter', handleMouseEnter);
-        area.removeEventListener('mousemove', handleMouseMove);
-        area.removeEventListener('mouseleave', handleMouseLeave);
-      });
-    };
-  }, [plotData, selectedParameterKey]);
+			tooltip.style.left = `${offsetX + 10}px`;
+			tooltip.style.top = `${offsetY + 10}px`;
+		};
+
+		const handleMouseLeave = () => {
+			tooltip.style.display = 'none';
+		};
+
+		const handleClick = (e: Event) => {
+			const area = e.currentTarget as SVGElement;
+			const areaId = area.id;
+			window.location.href = `/statistics/${areaId}`;
+		};
+
+		mapAreas.forEach(area => {
+			area.addEventListener('mouseenter', handleMouseEnter);
+			area.addEventListener('mousemove', handleMouseMove);
+			area.addEventListener('mouseleave', handleMouseLeave);
+			area.addEventListener('click', handleClick);
+		});
+
+		return () => {
+			mapAreas.forEach(area => {
+				area.removeEventListener('mouseenter', handleMouseEnter);
+				area.removeEventListener('mousemove', handleMouseMove);
+				area.removeEventListener('mouseleave', handleMouseLeave);
+				area.removeEventListener('click', handleClick);
+			});
+		};
+	}, [plotData, selectedParameterKey]);
 
   return (
     <div className="relative border border-gray-300 border-2 overflow-hidden w-full max-w-[800px]">
 			<img
 				src={BackgroundMap}
 				alt="Background Map"
+				className="w-full h-auto"
 			/>
 			<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
  				width="1207.000000pt" height="1760.000000pt" viewBox="0 0 1207.000000 1760.000000"
@@ -397,7 +403,7 @@ const MapPage: React.FC = () => {
 
   return (
     <div className="w-full mx-auto p-4 space-y-6 flex flex-col items-center max-w-[1200px]">
-      <header className="flex flex-col items-center w-full  border-b border-gray-300 p-2 sticky top-0 left-0 bg-white z-100">
+      <header className="flex flex-col items-center w-full  border-b border-gray-300 p-1 sticky top-0 left-0 bg-white z-100 m-0">
         <h1 className="text-xl font-bold text-center mb-4">Area Status Visualization</h1>
 
         <div className="flex justify-center items-center mb-2 gap-10 w-full">
