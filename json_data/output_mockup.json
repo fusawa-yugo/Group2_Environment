@@ -3,6 +3,7 @@
     {
       "hour": 10,
       "rooms": {
+<<<<<<< HEAD
         "Cafeteria Lipasto": {
           "noise": 0.939,
           "brightness": 0.5336,
@@ -72,6 +73,17 @@
           "score_lecture": 0.1851,
           "score_event": 0.5831,
           "score_group_study": 0.6655
+=======
+        "UBI Cafe": {
+          "noise": 0.5544297113490956,
+          "brightness": 0.13033171463012697,
+          "crowd": 0.375,
+          "score_studying_alone": null,
+          "score_commuting_waiting": null,
+          "score_lecture": null,
+          "score_event": null,
+          "score_group_study": 4.5
+>>>>>>> 1138c21622870a1c0691d411bfbf83764fa0f023
         }
       }
     },
@@ -79,6 +91,7 @@
       "hour": 12,
       "rooms": {
         "Cafeteria Lipasto": {
+<<<<<<< HEAD
           "noise": 0.5206,
           "brightness": 0.3495,
           "crowd": 0.4794,
@@ -147,12 +160,43 @@
           "score_lecture": 0.565,
           "score_event": 0.3691,
           "score_group_study": 0.4102
+=======
+          "noise": 0.5917377977686838,
+          "brightness": 0.08743330764770507,
+          "crowd": 0.6875,
+          "score_studying_alone": null,
+          "score_commuting_waiting": null,
+          "score_lecture": null,
+          "score_event": null,
+          "score_group_study": null
+        },
+        "UBI Cafe": {
+          "noise": 0.4724925157797908,
+          "brightness": 0.04091745899341725,
+          "crowd": 0.5833333333333334,
+          "score_studying_alone": null,
+          "score_commuting_waiting": null,
+          "score_lecture": null,
+          "score_event": null,
+          "score_group_study": 3.0
+        },
+        "library pegasus": {
+          "noise": 0.7974245167240743,
+          "brightness": 0.7103438110351562,
+          "crowd": 0.25,
+          "score_studying_alone": 5.0,
+          "score_commuting_waiting": null,
+          "score_lecture": null,
+          "score_event": null,
+          "score_group_study": null
+>>>>>>> 1138c21622870a1c0691d411bfbf83764fa0f023
         }
       }
     },
     {
       "hour": 14,
       "rooms": {
+<<<<<<< HEAD
         "Cafeteria Lipasto": {
           "noise": 0.6497,
           "brightness": 0.0042,
@@ -222,12 +266,54 @@
           "score_lecture": 0.7423,
           "score_event": 0.8313,
           "score_group_study": 0.2656
+=======
+        "Cafeteria julinia (oamk)": {
+          "noise": 0.46144440176772966,
+          "brightness": 0.02613198184967041,
+          "crowd": 0.25,
+          "score_studying_alone": null,
+          "score_commuting_waiting": null,
+          "score_lecture": null,
+          "score_event": null,
+          "score_group_study": null
+        },
+        "Oulun normal high school": {
+          "noise": 0.5015195606336527,
+          "brightness": 0.029043525695800782,
+          "crowd": 0.0,
+          "score_studying_alone": 5.0,
+          "score_commuting_waiting": null,
+          "score_lecture": null,
+          "score_event": null,
+          "score_group_study": null
+        },
+        "UBI Cafe": {
+          "noise": 0.46842508276553263,
+          "brightness": 0.028428801536560057,
+          "crowd": 0.125,
+          "score_studying_alone": null,
+          "score_commuting_waiting": null,
+          "score_lecture": null,
+          "score_event": null,
+          "score_group_study": null
+        },
+        "library pegasus": {
+          "noise": 0.6426392967799389,
+          "brightness": 0.42474835205078126,
+          "crowd": 0.75,
+          "score_studying_alone": 4.0,
+          "score_commuting_waiting": null,
+          "score_lecture": null,
+          "score_event": null,
+          "score_group_study": null
+>>>>>>> 1138c21622870a1c0691d411bfbf83764fa0f023
         }
       }
     },
     {
       "hour": 16,
       "rooms": {
+<<<<<<< HEAD
         "Cafeteria Lipasto": {
           "noise": 0.3083,
           "brightness": 0.4038,
@@ -297,6 +383,27 @@
           "score_lecture": 0.6131,
           "score_event": 0.2267,
           "score_group_study": 0.1731
+=======
+        "Tellus (nokia box)": {
+          "noise": 0.44362713611627935,
+          "brightness": 0.035165233612060545,
+          "crowd": 0.75,
+          "score_studying_alone": null,
+          "score_commuting_waiting": null,
+          "score_lecture": null,
+          "score_event": null,
+          "score_group_study": null
+        },
+        "library pegasus": {
+          "noise": 0.5141467093251143,
+          "brightness": 0.2646446094512939,
+          "crowd": 0.6666666666666666,
+          "score_studying_alone": null,
+          "score_commuting_waiting": null,
+          "score_lecture": null,
+          "score_event": 4.0,
+          "score_group_study": null
+>>>>>>> 1138c21622870a1c0691d411bfbf83764fa0f023
         }
       }
     }

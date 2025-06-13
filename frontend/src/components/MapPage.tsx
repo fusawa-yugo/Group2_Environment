@@ -2,10 +2,14 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 
-import Data from "../../../json_data/template.json"
+import RawData from "../../../json_data/template.json"
+
+import { OrganizeData } from '../lib';
+
 
 import BackgroundMap from '../assets/darker_map.png';
 
+const Data = OrganizeData(RawData);
 
 // --- Types and Data ---
 type InputData = {
@@ -36,14 +40,15 @@ type AreaConfigType = {
 }
 
 type AreaStatus = {
-  noise: number;
-  brightness: number;
-  crowd: number;
-  score_study: number;
-  score_relaxing: number;
-  score_eating: number;
-  score_socializing: number;
-}
+  noise: number | null;
+  brightness: number | null;
+  crowd: number | null;
+  score_study_alone: number | null;
+  score_group_study: number | null;
+  score_lecture: number | null;
+  score_commuting_waiting: number | null;
+  score_event: number | null;
+};
 
 
 type OptionConfigProps = {
@@ -55,7 +60,8 @@ type OptionConfigProps = {
   unit?: string;
 }
 
-const SelectOptions = ["noise", "brightness", "crowd", "score_study", "score_relaxing", "score_eating", "score_socializing"];
+const SelectOptions = ["noise", "brightness", "crowd", "score_study_alone", "score_group_study", "score_lecture", "score_commuting_waiting", "score_event"];
+
 
 type OptionConfigType = Record<keyof AreaStatus, OptionConfigProps>;
 const OptionConfig: OptionConfigType = {
@@ -63,53 +69,59 @@ const OptionConfig: OptionConfigType = {
     color: "#4ade80", // Tailwind: fill-green-400
     textLower: "Quiet",
     textHigher: "Loud",
-    minScore: 40,
-    maxScore: 70,
-    unit: "dB"
+    minScore: 0,
+    maxScore: 1,
+    // unit: "dB"
   },
   brightness: {
     color: "#facc15", // Tailwind: fill-yellow-400
     textLower: "Dim",
     textHigher: "Bright", 
     minScore: 0,
-    maxScore: 40000,
-    unit: "lux",
-    
+    maxScore: 1,
+    // unit: "lux",
   },
   crowd: {
     color: "#93c5fd", // Tailwind: fill-blue-300
     textLower: "Empty",
     textHigher: "Crowded",
-    maxScore: 100,
+    maxScore: 1,
     minScore: 0
   },
-  score_study: {
+  score_study_alone: {
     color: "#fde047", // Tailwind: fill-yellow-300
     textLower: "Not Suitable",
-    textHigher: "Good for Studying",
-    maxScore: 5,
-    minScore: 1
+    textHigher: "Good",
+    maxScore: 1,
+    minScore: 0
   },
-  score_relaxing: {
-    color: "#fcd34d", // Tailwind: fill-amber-300
-    textLower: "Not Relaxing",
-    textHigher: "Relaxing",
-    minScore: 1,
-    maxScore: 5
-  },
-  score_eating: {
-    color: "#38bdf8", // Tailwind: fill-sky-400
+  score_group_study: {
+    color: "#f87171", // Tailwind: fill-red-400
     textLower: "Not Suitable",
-    textHigher: "Good for Eating",
-    minScore: 1,
-    maxScore: 5
+    textHigher: "Good",
+    maxScore: 1,
+    minScore: 0
   },
-  score_socializing: {
-    color: "#fb923c", // Tailwind: fill-orange-400
+  score_lecture: {
+    color: "#60a5fa", // Tailwind: fill-blue-400
     textLower: "Not Suitable",
-    textHigher: "Good for Socializing",
-    minScore: 1,
-    maxScore: 5
+    textHigher: "Good",
+    maxScore: 1,
+    minScore: 0
+  },
+  score_commuting_waiting: {
+    color: "#34d399", // Tailwind: fill-green-400
+    textLower: "Not Suitable",
+    textHigher: "Good",
+    maxScore: 1,
+    minScore: 0
+  },
+  score_event: {
+    color: "#a78bfa", // Tailwind: fill-purple-400
+    textLower: "Not Suitable",
+    textHigher: "Good",
+    maxScore: 1,
+    minScore: 0
   },
 };
 
@@ -118,8 +130,10 @@ const preparePlotData = (selectedTime: number, selectedParameterKey: keyof AreaS
   const hourData = Data.hours.find(h => h.hour === selectedTime);
   if (!hourData) return {} as Record<AreaName, number>;
 
-  return Object.entries(hourData.rooms).reduce((acc, [area, roomStatus]) => {
-    acc[area as AreaName] = roomStatus[selectedParameterKey];
+  return Object.entries(hourData.rooms).reduce((acc, [area, areaStatus]) => {
+		if (selectedParameterKey in areaStatus) {
+			acc[area as AreaName] = areaStatus[selectedParameterKey] as number;
+		}
     return acc;
   }, {} as Record<AreaName, number>);
 }
