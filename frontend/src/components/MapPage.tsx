@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 
-import RawData from "../../../json_data/template.json"
+import RawData from "../../../json_data/output_mockup.json"
 
 import { OrganizeData } from '../lib';
 
@@ -12,19 +12,20 @@ import BackgroundMap from '../assets/darker_map.png';
 const Data = OrganizeData(RawData);
 
 // --- Types and Data ---
-type InputData = {
-  hours: TimeStatus[];
-}
 
-type TimeStatus = {
-  hour: number;
-  rooms: Record<AreaName, AreaStatus>;
-}
+// type InputData = {
+//   hours: TimeStatus[];
+// }
 
-type AreaName = "UBISSCafe" | "PSOASLounge" | "WetteriSali" | "Tellus" | "CafeteriaLipasto" | "CafeteriaJulinia" | "LibraryPegasus";
+// type TimeStatus = {
+//   hour: number;
+//   rooms: Record<AreaName, AreaStatus>;
+// }
+
+type AreaName = "UBICafe" | "PSOASLounge" | "WetteriSali" | "Tellus" | "CafeteriaLipasto" | "CafeteriaJulinia" | "LibraryPegasus";
 
 const AreaConfig: AreaConfigType ={
-	UBISSCafe: { name: "UBISS Cafe" },
+	UBICafe: { name: "UBI Cafe" },
 	PSOASLounge: { name: "PSOAS Lounge" },
 	WetteriSali: { name: "Wetteri Sali" },
 	Tellus: { name: "Tellus" },
@@ -58,9 +59,9 @@ type OptionConfigProps = {
   minScore?: number;
   maxScore?: number;
   unit?: string;
+	displayName?: string;
 }
 
-const SelectOptions = ["noise", "brightness", "crowd", "score_study_alone", "score_group_study", "score_lecture", "score_commuting_waiting", "score_event"];
 
 
 type OptionConfigType = Record<keyof AreaStatus, OptionConfigProps>;
@@ -71,7 +72,8 @@ const OptionConfig: OptionConfigType = {
     textHigher: "Loud",
     minScore: 0,
     maxScore: 1,
-    // unit: "dB"
+    // unit: "dB",
+		displayName: "Noise"
   },
   brightness: {
     color: "#facc15", // Tailwind: fill-yellow-400
@@ -80,48 +82,57 @@ const OptionConfig: OptionConfigType = {
     minScore: 0,
     maxScore: 1,
     // unit: "lux",
+		displayName: "Brightness"
   },
   crowd: {
     color: "#93c5fd", // Tailwind: fill-blue-300
     textLower: "Empty",
     textHigher: "Crowded",
     maxScore: 1,
-    minScore: 0
+    minScore: 0,
+    displayName: "Crowd"
   },
   score_study_alone: {
     color: "#fde047", // Tailwind: fill-yellow-300
     textLower: "Not Suitable",
     textHigher: "Good",
     maxScore: 1,
-    minScore: 0
+    minScore: 0,
+    displayName: "Score for Studying Alone"
+		
   },
   score_group_study: {
     color: "#f87171", // Tailwind: fill-red-400
     textLower: "Not Suitable",
     textHigher: "Good",
     maxScore: 1,
-    minScore: 0
+    minScore: 0,
+    displayName: "Score for Group Study"
+		
   },
   score_lecture: {
     color: "#60a5fa", // Tailwind: fill-blue-400
     textLower: "Not Suitable",
     textHigher: "Good",
     maxScore: 1,
-    minScore: 0
+    minScore: 0,
+		displayName: "Score for Having Lectures"
   },
   score_commuting_waiting: {
     color: "#34d399", // Tailwind: fill-green-400
     textLower: "Not Suitable",
     textHigher: "Good",
     maxScore: 1,
-    minScore: 0
+    minScore: 0,
+		displayName: "Score for Commuting/Waiting"
   },
   score_event: {
     color: "#a78bfa", // Tailwind: fill-purple-400
     textLower: "Not Suitable",
     textHigher: "Good",
     maxScore: 1,
-    minScore: 0
+    minScore: 0,
+		displayName: "Score for Events"
   },
 };
 
@@ -181,13 +192,12 @@ const TimeSlider: React.FC<TimeSliderProps> = ({
 
 // SenseSelector Component
 type SenseSelectorProps = {
-  options: string[];
   selectedValue: keyof AreaStatus;
   onValueChange: (value: keyof AreaStatus) => void;
   label?: string;
 }
 
-const SenseSelector: React.FC<SenseSelectorProps> = ({ options, selectedValue, onValueChange, label }) => {
+const SenseSelector: React.FC<SenseSelectorProps> = ({ selectedValue, onValueChange, label }) => {
   return (
     <div className="w-full flex flex-col p-2">
       {label && <label htmlFor="sense-select" className="text-gray-700 mb-2">{label}</label>}
@@ -197,9 +207,9 @@ const SenseSelector: React.FC<SenseSelectorProps> = ({ options, selectedValue, o
         value={selectedValue}
         onChange={(e) => onValueChange(e.target.value as keyof AreaStatus)}
       >
-        {options.map((option) => (
+        {Object.keys(OptionConfig).map((option) => (
           <option key={option} value={option}>
-            {option}
+            {OptionConfig[option as keyof AreaStatus].displayName || option}
           </option>
         ))}
       </select>
@@ -385,7 +395,7 @@ const MapComponent: React.FC<MapComponentProps> = ({ plotData, selectedParameter
 				4 447 -1 959 -10 741 -14 932 -15 944 -5 10 9 13 23 9 49 -5 33 18 704 32 918
 				5 83 8 92 26 95 31 5 46 34 27 53 -12 12 -57 16 -244 20 -127 3 -511 12 -855
 				20 -827 20 -863 20 -888 -2z"/>
-				<path id="UBISSCafe" className="map-area" d="M7890 4835 c-8 -9 -10 -34 -5 -77 3 -35 2 -155 -4 -268 -7 -155 -7
+				<path id="UBICafe" className="map-area" d="M7890 4835 c-8 -9 -10 -34 -5 -77 3 -35 2 -155 -4 -268 -7 -155 -7
 				-208 2 -219 10 -12 69 -13 387 -7 282 5 378 9 387 19 20 19 41 530 23 552 -18
 				22 -771 23 -790 0z"/>
 				<path id="WetteriSali" className="map-area" d="M3593 4263 c-12 -2 -26 -10 -31 -16 -5 -7 -15 -188 -21 -407 -6 -217
@@ -423,7 +433,6 @@ const MapPage: React.FC = () => {
         <div className="flex justify-center items-center mb-2 gap-10 w-full">
           <div className="flex-1">
             <SenseSelector
-              options={SelectOptions}
               selectedValue={selectedParameterKey}
               onValueChange={setSelectedParameterKey}
               label="Select Parameter"

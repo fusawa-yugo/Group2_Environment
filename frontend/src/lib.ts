@@ -2,9 +2,9 @@ const hourList: number[] = [10, 12, 14, 16];
 
 const areaNameMap: Record<string, string> = {
   "UBI Cafe": "UBICafe",
-  "PSOASLounge": "PSOASLounge",
+  "PSOAS study / room 131": "PSOASLounge",
   "Oulun normal high school": "WetteriSali",
-  "Tellus": "Tellus",
+  "Tellus (nokia box)": "Tellus",
   "Cafeteria Lipasto": "CafeteriaLipasto",
   "library pegasus": "LibraryPegasus",
   "Cafeteria julinia (oamk)": "CafeteriaJulinia",

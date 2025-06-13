@@ -7,14 +7,14 @@ import Data from "../../../json_data/template.json"
 
 
 // --- Types and Data ---
-type InputData = {
-  hours: TimeStatus[];
-}
+// type InputData = {
+//   hours: TimeStatus[];
+// }
 
-type TimeStatus = {
-  hour: number;
-  rooms: Record<AreaName, RoomStatus>;
-}
+// type TimeStatus = {
+//   hour: number;
+//   rooms: Record<AreaName, RoomStatus>;
+// }
 
 type AreaName = "room_a" | "room_b" | "room_c" | "room_d" | "room_e" | "room_f" | "room_g" | "room_h";
 
