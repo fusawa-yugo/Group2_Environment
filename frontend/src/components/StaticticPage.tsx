@@ -1,10 +1,8 @@
 import { useState }	from 'react';
-
 import { useParams, Link } from 'react-router-dom';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, Legend } from 'recharts';
 import Data from '../../../json_data/subjective_data.json';
 
-const TimeOption = [10, 12, 14, 16];
 
 const areaNameMap: Record<string, string> = {
   "UBI Cafe": "UBICafe",
@@ -27,15 +25,23 @@ const reversedAreaNameMap: Record<string, string> = {
 };
 
 
-const optionsMap: Record<string, string> = {
-  score_studying_alone: "score_study_alone",
-  score_group_study: "score_group_study",
-  score_lecture: "score_lecture",
-  score_commuting_waiting: "score_commuting_waiting",
-  score_event: "score_event",
+// const optionsMap: Record<string, string> = {
+//   score_studying_alone: "score_study_alone",
+//   score_group_study: "score_group_study",
+//   score_lecture: "score_lecture",
+//   score_commuting_waiting: "score_commuting_waiting",
+//   score_event: "score_event",
+
+// };
+
+const OptionConfig: Record<scoreType, {displayName: string, color: string}> = {
+	score_studying_alone: { displayName: "Studying Alone", color: "#8884d8" },
+	score_group_study: { displayName: "Group Study", color: "#82ca9d" },
+	score_lecture: { displayName: "Lecture", color: "#ffc658" },
+	score_commuting_waiting: { displayName: "Commuting/Waiting", color: "#ff8042" },
+	score_event: { displayName: "Event", color: "#d0ed57" },
 };
 
-const options = Object.values(optionsMap);
 
 const areaNames = Object.values(areaNameMap);
 
@@ -45,16 +51,15 @@ type plotAttributes = "perception_noise" | "perception_light" | "perception_smel
 
 type ScoreBarProps = {
   data: Record<string, number>;
-};
-
-type PlotDataProps = {
-	[key in scoreType]: Record<plotAttributes, ScoreBarProps>;
+	color?: string;
 };
 
 const ScoreBar: React.FC<ScoreBarProps> = ({ 
-	data 
+	data,
+	color = "#8884d8" 
 }) => {
   const chartData = Object.entries(data).map(([rating, count]) => ({ rating, count }));
+	console.log("ScoreBar data:", chartData);
   
   return (
     <ResponsiveContainer width="100%" height={300}>
@@ -63,10 +68,34 @@ const ScoreBar: React.FC<ScoreBarProps> = ({
         <XAxis dataKey="rating" label={{ value: 'rating', position: 'insideBottom', offset: -5 }} />
         <YAxis label={{ value: 'count', angle: -90, position: 'insideLeft' }} />
         <Tooltip />
-        <Bar dataKey="count" fill="#8884d8" />
+        <Bar dataKey="count" fill={color} />
       </BarChart>
     </ResponsiveContainer>
   );
+}
+
+const CountPie: React.FC<{ data: { name: string; value: number }[] }> = ({
+	data
+}) => {
+	return (
+		<PieChart width={600} height={600}>
+			<Pie
+				data={data}
+				cx="50%"       // 中心X
+				cy="50%"       // 中心Y
+				outerRadius={100}
+				fill="#8884d8"
+				dataKey="value"
+				label
+			>
+				{data.map((entry, index) => (
+					<Cell key={`cell-${index}`} fill={OptionConfig[entry.name as scoreType].color} />
+				))}
+			</Pie>
+			<Tooltip />
+			<Legend />
+		</PieChart>
+	)
 }
 
 type TimeSliderProps = {
@@ -107,6 +136,9 @@ const TimeSlider: React.FC<TimeSliderProps> = ({
 	);
 };
 
+type PlotDataProps = {
+	[key in scoreType]: Record<plotAttributes, ScoreBarProps>;
+};
 
 const StatisticPage: React.FC = () => {
 	const { areaId } = useParams<{ areaId: string }>();
@@ -116,21 +148,32 @@ const StatisticPage: React.FC = () => {
 
   const plotData: PlotDataProps = Data.hours.find((d) => d.hour === time)?.rooms[areaName as keyof typeof Data.hours[0]['rooms']] || {};
 
+	const PieData = Object.entries(plotData).map(([key, value]) => ({
+		name: key,
+		value: Object.values(value["overall_score"]).reduce((sum, num) => sum + num, 0),
+	}));
+	
+
+
 	return (
-    <div className="flex flex-col items-center p-5">
+    <div className="flex flex-col items-center p-5 w-full">
 			<Link to="/map" className="text-blue-500 hover:underline mb-4 self-start">
 				← Back
 			</Link>
       <h1 className="font-semibold mb-4">Statistics for Area: {areaId}</h1>
-			<h1>OverAll Score</h1>
-			<TimeSlider time={time} setTime={setTime} />
-			<div className="grid grid-cols-2 gap-4 w-full">
-				{Object.keys(plotData).map((key) => (
-					<div key={key} className="flex flex-col items-center">
-						<h2 className="font-medium">{key}</h2>
-						<ScoreBar data={plotData[key]["overall_score"]} />
-					</div>
-				))}
+			<div className="w-full max-w-[800px]">
+				<TimeSlider time={time} setTime={setTime} />
+			</div>
+			<div className="flex w-full ">
+				<CountPie data={PieData} />
+				<div className="grid grid-cols-2 gap-2 flex-grow">
+					{Object.keys(plotData).map((key) => (
+						<div key={key} className="flex flex-col items-center">
+							<h2 className="font-medium">{OptionConfig[key as scoreType].displayName}</h2>
+							<ScoreBar data={plotData[key as keyof PlotDataProps]["overall_score"]} color={OptionConfig[key as scoreType].color} />
+						</div>
+					))}
+				</div>
 			</div>
     </div>
   );
